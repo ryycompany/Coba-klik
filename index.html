@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nembak Cewek 😘</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      overflow: hidden;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 24px;
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+    #yes:hover {
+      background: #ff3355;
+    }
+    #no {
+      background: #ccc;
+      color: black;
+      position: absolute;
+      transition: top 0.2s, left 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mau jadi pacarku gak? 🥰</h1>
+    <button id="yes" class="btn">Yes 💖</button>
+    <button id="no" class="btn">No 🙅</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    yesBtn.addEventListener("click", () => {
+      alert("Yeay! Kamu resmi jadi pacarku 😍💖");
+    });
+
+    // Fungsi untuk tombol "No" hanya di layar HP
+    function moveButton() {
+      if (window.innerWidth <= 768) { // hanya HP
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+      }
+    }
+
+    // Hindari terus kalau disentuh/klik
+    noBtn.addEventListener("mouseenter", moveButton);
+    noBtn.addEventListener("click", moveButton); 
+    noBtn.addEventListener("touchstart", moveButton); 
+  </script>
+</body>
+</html>
