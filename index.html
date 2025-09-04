@@ -3,53 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coba Klik Dulu</title>
+  <title>....</title>
   <style>
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a8edea, #fed6e3);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
       font-family: 'Poppins', sans-serif;
       margin: 0;
       overflow: hidden;
     }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.08);
       text-align: center;
       z-index: 2;
       position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      min-width: 350px;
     }
+
     h1 {
-      font-size: 24px;
+      font-size: 28px;
       color: #ff4d6d;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      position: relative;
+      height: 60px;
+    }
+
     .btn {
-      padding: 12px 25px;
+      padding: 15px 30px;
       border: none;
       border-radius: 30px;
       font-size: 18px;
+      font-weight: 500;
       cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
+
     #yes {
-      background: #ff4d6d;
+      background: linear-gradient(45deg, #ff4d6d, #ff6b8a);
       color: white;
     }
+
     #yes:hover {
-      background: #ff3355;
+      background: linear-gradient(45deg, #ff3355, #ff5577);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
     }
+
     #no {
-      background: #ccc;
-      color: black;
+      background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
+      color: #666;
       position: absolute;
-      transition: top 0.2s, left 0.2s;
+      transition: all 0.2s ease;
+    }
+
+    #no:hover {
+      background: linear-gradient(45deg, #d0d0d0, #e0e0e0);
+      transform: scale(0.95);
     }
 
     /* Popup Style */
@@ -57,69 +94,121 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 3;
+      z-index: 1000;
     }
+
     .popup-content {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 30px 40px;
+      border-radius: 20px;
       text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      animation: pop 0.3s ease;
-      z-index: 4;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      animation: popIn 0.5s ease;
+      z-index: 1001;
       position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
+
     .popup-content h2 {
       color: #ff4d6d;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
     }
+
     .popup-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 15px;
+      margin-top: 20px;
     }
+
     .close-btn, .wa-btn {
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 10px;
+      border-radius: 15px;
       cursor: pointer;
       font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
+
     .close-btn {
-      background: #aaa;
+      background: linear-gradient(45deg, #aaa, #bbb);
       color: white;
     }
+
+    .close-btn:hover {
+      background: linear-gradient(45deg, #999, #aaa);
+      transform: translateY(-1px);
+    }
+
     .wa-btn {
-      background: #25D366;
+      background: linear-gradient(45deg, #25D366, #20c956);
       color: white;
     }
+
     .wa-btn:hover {
-      background: #20b857;
+      background: linear-gradient(45deg, #20b857, #1da851);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     }
-    @keyframes pop {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+
+    @keyframes popIn {
+      from { 
+        transform: scale(0.8) translateY(-20px); 
+        opacity: 0; 
+      }
+      to { 
+        transform: scale(1) translateY(0); 
+        opacity: 1; 
+      }
     }
 
     /* Bunga berguguran */
     .flower {
       position: fixed;
       top: -50px;
-      color: pink;
-      font-size: 20px;
+      font-size: 25px;
       pointer-events: none;
-      z-index: 5; /* selalu di depan */
+      z-index: 999;
       animation: fall linear forwards;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
+
     @keyframes fall {
       to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.7;
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Efek sparkle */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 998;
+      animation: sparkleAnim 1.5s ease-out forwards;
+    }
+
+    @keyframes sparkleAnim {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1) rotate(180deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
       }
     }
   </style>
@@ -127,8 +216,10 @@
 <body>
   <div class="container">
     <h1>Mau jadi pacarku gak? 🥰</h1>
-    <button id="yes" class="btn">Yes 💖</button>
-    <button id="no" class="btn">No 🙅</button>
+    <div class="buttons-container">
+      <button id="yes" class="btn">Yes 💖</button>
+      <button id="no" class="btn">No 🙅</button>
+    </div>
   </div>
 
   <!-- Popup -->
@@ -157,6 +248,10 @@
     const popupText = document.getElementById("popup-text");
     const waLink = document.getElementById("waLink");
     const bgMusic = document.getElementById("bgMusic");
+    const buttonsContainer = document.querySelector(".buttons-container");
+
+    let flowerInterval = null;
+    let sparkleInterval = null;
 
     function showPopup(msg, withWA = false) {
       popupText.textContent = msg;
@@ -168,50 +263,158 @@
         waLink.style.display = "none";
       }
     }
+
     function closePopup() {
       popup.style.display = "none";
       bgMusic.pause();
       bgMusic.currentTime = 0;
+      stopFlowers();
     }
 
-    yesBtn.addEventListener("click", () => {
+    // Tombol Yes - bisa diklik
+    yesBtn.addEventListener("click", (e) => {
+      createSparkles(e.clientX, e.clientY);
       showPopup("Yeay! Kamu resmi jadi pacarku 😍💖", true);
-      bgMusic.currentTime = 60; // mulai dari menit reff (atur sesuai lagunya)
+      bgMusic.currentTime = 60;
       bgMusic.play();
       startFlowers();
     });
 
-    // Fungsi tombol No
-    function moveButton() {
-      if (window.innerWidth <= 768) { // HP
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
-      } else {
-        showPopup("Eh jangan pilih No dong 😭");
+    // Tombol No - menghindari klik
+    function moveNoButton(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const containerRect = buttonsContainer.getBoundingClientRect();
+      const yesRect = yesBtn.getBoundingClientRect();
+      const padding = 80;
+      const safeDistance = 140;
+
+      let x, y;
+      let attempts = 0;
+      
+      do {
+        const maxX = containerRect.width - noBtn.offsetWidth - padding;
+        const maxY = containerRect.height - noBtn.offsetHeight - padding;
+        
+        x = Math.random() * Math.max(0, maxX - padding) + padding;
+        y = Math.random() * Math.max(0, maxY - padding) + padding;
+        
+        // Pastikan dalam batas container
+        x = Math.max(padding, Math.min(x, maxX));
+        y = Math.max(padding, Math.min(y, maxY));
+        
+        attempts++;
+      } while (
+        attempts < 10 && (
+          Math.abs(x - (yesRect.left - containerRect.left)) < safeDistance ||
+          Math.abs(y - (yesRect.top - containerRect.top)) < safeDistance
+        )
+      );
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      
+      // Efek visual saat tombol kabur
+      noBtn.style.transform = "scale(0.9) rotate(5deg)";
+      setTimeout(() => {
+        noBtn.style.transform = "scale(1) rotate(0deg)";
+      }, 200);
+    }
+
+    // Event untuk tombol No (mencegah klik dan membuat kabur)
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+    noBtn.addEventListener("pointerdown", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    // Bunga berguguran - hanya saat Yes diklik
+    function startFlowers() {
+      stopFlowers(); // Hentikan yang lama jika ada
+      
+      flowerInterval = setInterval(() => {
+        const flowers = ["🌸", "🌺", "💖", "💕", "🌹", "🌻", "🌷", "💐"];
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.fontSize = (Math.random() * 15 + 20) + "px";
+        flower.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        flower.style.opacity = Math.random() * 0.8 + 0.4;
+        
+        document.body.appendChild(flower);
+        
+        setTimeout(() => {
+          if (flower.parentNode) {
+            flower.remove();
+          }
+        }, 5000);
+      }, 200);
+
+      // Sparkles tambahan
+      sparkleInterval = setInterval(() => {
+        createRandomSparkles();
+      }, 800);
+    }
+
+    function stopFlowers() {
+      if (flowerInterval) {
+        clearInterval(flowerInterval);
+        flowerInterval = null;
+      }
+      if (sparkleInterval) {
+        clearInterval(sparkleInterval);
+        sparkleInterval = null;
+      }
+      
+      // Hapus semua bunga yang masih ada
+      const flowers = document.querySelectorAll('.flower, .sparkle');
+      flowers.forEach(flower => flower.remove());
+    }
+
+    function createSparkles(x, y) {
+      const sparkles = ["✨", "⭐", "💫", "🌟"];
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => {
+          const sparkle = document.createElement("div");
+          sparkle.classList.add("sparkle");
+          sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+          sparkle.style.left = (x + (Math.random() - 0.5) * 100) + "px";
+          sparkle.style.top = (y + (Math.random() - 0.5) * 100) + "px";
+          sparkle.style.fontSize = (Math.random() * 10 + 15) + "px";
+          document.body.appendChild(sparkle);
+          
+          setTimeout(() => {
+            if (sparkle.parentNode) {
+              sparkle.remove();
+            }
+          }, 1500);
+        }, i * 100);
       }
     }
 
-    noBtn.addEventListener("mouseenter", moveButton);
-    noBtn.addEventListener("click", moveButton);
-    noBtn.addEventListener("touchstart", moveButton);
-
-    // Bunga jatuh
-    function startFlowers() {
-      setInterval(() => {
-        const flower = document.createElement("div");
-        flower.classList.add("flower");
-        flower.textContent = "🌸";
-        flower.style.left = Math.random() * 100 + "vw";
-        flower.style.fontSize = (Math.random() * 20 + 15) + "px";
-        flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(flower);
-        setTimeout(() => {
-          flower.remove();
-        }, 6000);
-      }, 300);
+    function createRandomSparkles() {
+      const sparkles = ["✨", "💫"];
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.top = Math.random() * 100 + "vh";
+      sparkle.style.fontSize = (Math.random() * 8 + 12) + "px";
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        if (sparkle.parentNode) {
+          sparkle.remove();
+        }
+      }, 1500);
     }
+
+    // Set posisi awal tombol No
+    window.addEventListener('load', () => {
+      noBtn.style.left = "200px";
+      noBtn.style.top = "10px";
+    });
   </script>
 </body>
 </html>
