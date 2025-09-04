@@ -1,167 +1,342 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coba klik dulu</title>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      overflow: hidden;
+    <!DOCTYPE html>  
+<html lang="id">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Coba Klik Dulu</title>  
+  <style>  
+    body {  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      height: 100vh;  
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);  
+      font-family: 'Poppins', sans-serif;  
+      margin: 0;  
+      overflow: hidden;  
+    }  
+    .container {  
+      background: white;  
+      padding: 30px;  
+      border-radius: 20px;  
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);  
+      text-align: center;  
+    }  
+    h1 {  
+      font-size: 24px;  
+      color: #ff4d6d;  
+      margin-bottom: 20px;  
+    }  
+    .btn {  
+      padding: 12px 25px;  
+      border: none;  
+      border-radius: 30px;  
+      font-size: 18px;  
+      cursor: pointer;  
+      margin: 10px;  
+      transition: 0.3s;  
+    }  
+    #yes {  
+      background: #ff4d6d;  
+      color: white;  
+    }  
+    #yes:hover {  
+      background: #ff3355;  
+    }  
+    #no {  
+      background: #ccc;  
+      color: black;  
+      position: absolute;  
+      transition: top 0.2s, left 0.2s;  
+    }  
+    /* Popup Style */  
+    .popup {  
+      position: fixed;  
+      top: 0; left: 0;  
+      width: 100%; height: 100%;  
+      background: rgba(0,0,0,0.5);  
+      display: none;  
+      justify-content: center;  
+      align-items: center;  
+      z-index: 1000;
+    }  
+    .popup-content {  
+      background: white;  
+      padding: 20px 30px;  
+      border-radius: 15px;  
+      text-align: center;  
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);  
+      animation: pop 0.3s ease;  
+      position: relative;
+      z-index: 1001;
+    }  
+    .popup-content h2 {  
+      color: #ff4d6d;  
+      margin-bottom: 15px;  
+    }  
+    .popup-buttons {  
+      display: flex;  
+      justify-content: center;  
+      gap: 15px;  
+      margin-top: 15px;  
+    }  
+    .close-btn, .wa-btn {  
+      padding: 10px 20px;  
+      border: none;  
+      border-radius: 10px;  
+      cursor: pointer;  
+      font-size: 16px;  
+    }  
+    .close-btn {  
+      background: #aaa;  
+      color: white;  
+    }  
+    .wa-btn {  
+      background: #25D366;  
+      color: white;  
+    }  
+    .wa-btn:hover {  
+      background: #20b857;  
+    }  
+    @keyframes pop {  
+      from { transform: scale(0.7); opacity: 0; }  
+      to { transform: scale(1); opacity: 1; }  
     }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      text-align: center;
+
+    /* Flower Animation Styles */
+    .flower {
+      position: fixed;
+      font-size: 20px;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 999;
     }
-    h1 {
-      font-size: 24px;
-      color: #ff4d6d;
-      margin-bottom: 20px;
+
+    @keyframes fall {
+      from {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(calc(100vh + 100px)) rotate(360deg);
+        opacity: 0;
+      }
     }
-    .btn {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
-    }
-    #yes {
+
+    /* Music Control Button */
+    .music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
       background: #ff4d6d;
       color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1002;
+      display: none;
     }
-    #yes:hover {
+
+    .music-control:hover {
       background: #ff3355;
     }
-    #no {
-      background: #ccc;
-      color: black;
-      position: absolute;
-      transition: top 0.2s, left 0.2s;
-    }
-
-    /* Popup Style */
-    .popup {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-    .popup-content {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      animation: pop 0.3s ease;
-    }
-    .popup-content h2 {
-      color: #ff4d6d;
-      margin-bottom: 15px;
-    }
-    .popup-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-    }
-    .close-btn, .wa-btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .close-btn {
-      background: #aaa;
-      color: white;
-    }
-    .wa-btn {
-      background: #25D366;
-      color: white;
-    }
-    .wa-btn:hover {
-      background: #20b857;
-    }
-    @keyframes pop {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Mau jadi pacarku gak? 🥰</h1>
-    <button id="yes" class="btn">Yes 💖</button>
-    <button id="no" class="btn">No 🙅</button>
+  </style>  
+</head>  
+<body>  
+  <div class="container">  
+    <h1>Mau jadi pacarku gak? 🥰</h1>  
+    <button id="yes" class="btn">Yes 💖</button>  
+    <button id="no" class="btn">No 🙅</button>  
   </div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <h2 id="popup-text"></h2>
-      <div class="popup-buttons">
-        <button class="close-btn" onclick="closePopup()">Tutup</button>
-        <a id="waLink" href="#" target="_blank">
-          <button class="wa-btn">Chat WhatsApp 💬</button>
-        </a>
-      </div>
-    </div>
+  <!-- Music Control Button -->
+  <button id="musicControl" class="music-control" onclick="toggleMusic()">🎵</button>
+
+  <!-- Popup -->    
+  <div id="popup" class="popup">  
+    <div class="popup-content">  
+      <h2 id="popup-text"></h2>  
+      <div class="popup-buttons">  
+        <button class="close-btn" onclick="closePopup()">Tutup</button>  
+        <a id="waLink" href="#" target="_blank">  
+          <button class="wa-btn">Chat WhatsApp 💬</button>  
+        </a>  
+      </div>  
+    </div>  
   </div>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const popup = document.getElementById("popup");
-    const popupText = document.getElementById("popup-text");
-    const waLink = document.getElementById("waLink");
+  <!-- Audio Elements -->
+  <audio id="bgMusic" preload="auto" loop>
+    <!-- Anda bisa mengganti src dengan file MP3 lokal atau URL online -->
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+    <source src="Sempurna - Andra and the backbone.mp3" type="audio/mpeg">
+    <!-- Fallback jika file tidak ada -->
+    Your browser does not support the audio element.
+  </audio>
 
-    function showPopup(msg, withWA = false) {
-      popupText.textContent = msg;
-      popup.style.display = "flex";
-      if (withWA) {
-        waLink.style.display = "inline-block";
-        waLink.href = "https://wa.me/6285603974452?text=Iya%20aku%20mau%20jadi%20pacar%20kamu%20😍💖";
-      } else {
-        waLink.style.display = "none";
+  <script>  
+    const noBtn = document.getElementById("no");  
+    const yesBtn = document.getElementById("yes");  
+    const popup = document.getElementById("popup");  
+    const popupText = document.getElementById("popup-text");  
+    const waLink = document.getElementById("waLink");  
+    const musicControl = document.getElementById("musicControl");
+    const bgMusic = document.getElementById("bgMusic");
+    
+    let isPlaying = false;
+    let flowersInterval;
+    
+    function createFlower() {
+      const flowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '💐', '🌼', '🌿'];
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      flower.style.opacity = Math.random() * 0.8 + 0.2;
+      document.body.appendChild(flower);
+      
+      setTimeout(() => {
+        if (flower.parentNode) {
+          flower.parentNode.removeChild(flower);
+        }
+      }, 5000);
+    }
+    
+    function startFlowers() {
+      flowersInterval = setInterval(createFlower, 300);
+    }
+    
+    function stopFlowers() {
+      if (flowersInterval) {
+        clearInterval(flowersInterval);
+        // Remove existing flowers
+        const flowers = document.querySelectorAll('.flower');
+        flowers.forEach(flower => flower.remove());
       }
     }
-    function closePopup() {
-      popup.style.display = "none";
+    
+    function playMusic() {
+      bgMusic.currentTime = 0;
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        musicControl.style.display = 'block';
+        musicControl.textContent = '⏸️';
+        console.log('Music started playing');
+      }).catch(error => {
+        console.log('Could not play audio:', error);
+        // Try alternative approach
+        tryAlternativeSound();
+      });
+    }
+    
+    function pauseMusic() {
+      bgMusic.pause();
+      isPlaying = false;
+      musicControl.textContent = '🎵';
+    }
+    
+    function toggleMusic() {
+      if (isPlaying) {
+        pauseMusic();
+      } else {
+        playMusic();
+      }
     }
 
-    yesBtn.addEventListener("click", () => {
-      showPopup("Yeay! Kamu resmi jadi pacarku 😍💖", true);
+    // Alternative sound approach
+    function tryAlternativeSound() {
+      // Web Audio API approach for generating a simple tune
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playNote(frequency, duration) {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.value = frequency;
+          oscillator.type = 'sine';
+          
+          gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+          
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        // Play a simple romantic melody
+        const melody = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00]; // C5 to A5
+        melody.forEach((freq, index) => {
+          setTimeout(() => playNote(freq, 0.5), index * 200);
+        });
+        
+        musicControl.style.display = 'block';
+        musicControl.textContent = '🎵';
+        
+      } catch (error) {
+        console.log('Web Audio API not supported:', error);
+      }
+    }
+  
+    function showPopup(msg, withWA = false) {  
+      popupText.textContent = msg;  
+      popup.style.display = "flex";  
+      if (withWA) {  
+        waLink.style.display = "inline-block";  
+        waLink.href = "https://wa.me/6285603974452?text=Iya%20aku%20mau%20jadi%20pacar%20kamu%20😍💖";  
+        startFlowers();
+        playMusic();
+      } else {  
+        waLink.style.display = "none";  
+      }  
+    }  
+    
+    function closePopup() {  
+      popup.style.display = "none";  
+      stopFlowers();
+      pauseMusic();
+      musicControl.style.display = 'none';
+    }  
+  
+    yesBtn.addEventListener("click", () => {  
+      showPopup("Yeay! Kamu resmi jadi pacarku 😍💖", true);  
+    });  
+  
+    // Fungsi tombol No  
+    function moveButton() {  
+      if (window.innerWidth <= 768) { // HP  
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);  
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);  
+        noBtn.style.left = `${x}px`;  
+        noBtn.style.top = `${y}px`;  
+      } else {  
+        showPopup("Eh jangan pilih No dong 😭");  
+      }  
+    }  
+  
+    noBtn.addEventListener("mouseenter", moveButton);  
+    noBtn.addEventListener("click", moveButton);  
+    noBtn.addEventListener("touchstart", moveButton);
+
+    // Set volume
+    bgMusic.volume = 0.3;
+    
+    // Handle audio loading errors
+    bgMusic.addEventListener('error', function(e) {
+      console.log('Audio loading error:', e);
+      console.log('Trying alternative sound approach...');
     });
 
-    // Fungsi tombol No
-    function moveButton() {
-      if (window.innerWidth <= 768) { // HP
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
-      } else {
-        showPopup("Eh jangan pilih No dong 😭");
-      }
-    }
-
-    noBtn.addEventListener("mouseenter", moveButton);
-    noBtn.addEventListener("click", moveButton);
-    noBtn.addEventListener("touchstart", moveButton);
+    bgMusic.addEventListener('canplay', function() {
+      console.log('Audio is ready to play');
+    });
   </script>
-</body>
-</html>
+  </script>  
+</body>  
+  </html>
