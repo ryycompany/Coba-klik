@@ -267,7 +267,7 @@
     function closePopup() {
       popup.style.display = "none";
       bgMusic.pause();
-      bgMusic.currentTime = 5;
+      bgMusic.currentTime = 0;
       stopFlowers();
     }
 
@@ -275,7 +275,7 @@
     yesBtn.addEventListener("click", (e) => {
       createSparkles(e.clientX, e.clientY);
       showPopup("Yeay! Kamu resmi jadi pacarku 😍💖", true);
-      bgMusic.currentTime = 60;
+      bgMusic.currentTime = 5;
       bgMusic.play();
       startFlowers();
     });
