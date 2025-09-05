@@ -17,13 +17,11 @@
       margin: 0;
       overflow: hidden;
     }
-
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .container {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -36,7 +34,6 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       min-width: 350px;
     }
-
     h1 {
       font-size: 28px;
       color: #ff4d6d;
@@ -44,7 +41,6 @@
       font-weight: 600;
       text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
     .buttons-container {
       display: flex;
       justify-content: center;
@@ -53,7 +49,6 @@
       position: relative;
       height: 60px;
     }
-
     .btn {
       padding: 15px 30px;
       border: none;
@@ -65,34 +60,21 @@
       position: relative;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-
-    #yes {
-      background: linear-gradient(45deg, #ff4d6d, #ff6b8a);
-      color: white;
-    }
-
-    #yes:hover {
-      background: linear-gradient(45deg, #ff3355, #ff5577);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
-    }
-
+    #yes { background: linear-gradient(45deg, #ff4d6d, #ff6b8a); color: white; }
+    #yes:hover { background: linear-gradient(45deg, #ff3355, #ff5577); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4); }
+    
+    /* === BAGIAN YANG DIUBAH === */
     #no {
       background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
       color: #666;
       position: absolute;
-      transition: all 0.2s ease;
+      /* Menambahkan transisi pada posisi 'top' dan 'left' agar gerakan menghindar lebih halus */
+      transition: top 0.4s ease-out, left 0.4s ease-out, transform 0.2s ease;
     }
-
-    #no:hover {
-      background: linear-gradient(45deg, #d0d0d0, #e0e0e0);
-      transform: scale(0.95);
-    }
-
-    /* Popup Style */
+    #no:hover { background: linear-gradient(45deg, #d0d0d0, #e0e0e0); transform: scale(0.95); }
+    
     .popup {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(5px);
@@ -101,7 +83,6 @@
       align-items: center;
       z-index: 1000;
     }
-
     .popup-content {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -114,115 +95,45 @@
       position: relative;
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
-
-    .popup-content h2 {
-      color: #ff4d6d;
-      margin-bottom: 20px;
-      font-size: 24px;
-      font-weight: 600;
-    }
-
-    .popup-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
+    .popup-content h2 { color: #ff4d6d; margin-bottom: 20px; font-size: 24px; font-weight: 600; }
+    .popup-buttons { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
     .close-btn, .wa-btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      padding: 12px 24px; border: none; border-radius: 15px;
+      cursor: pointer; font-size: 16px; font-weight: 500; transition: all 0.3s ease;
     }
-
-    .close-btn {
-      background: linear-gradient(45deg, #aaa, #bbb);
-      color: white;
-    }
-
-    .close-btn:hover {
-      background: linear-gradient(45deg, #999, #aaa);
-      transform: translateY(-1px);
-    }
-
-    .wa-btn {
-      background: linear-gradient(45deg, #25D366, #20c956);
-      color: white;
-    }
-
-    .wa-btn:hover {
-      background: linear-gradient(45deg, #20b857, #1da851);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    }
-
-    @keyframes popIn {
-      from { 
-        transform: scale(0.8) translateY(-20px); 
-        opacity: 0; 
-      }
-      to { 
-        transform: scale(1) translateY(0); 
-        opacity: 1; 
-      }
-    }
-
-    /* Bunga berguguran */
-    .flower {
+    .close-btn { background: linear-gradient(45deg, #aaa, #bbb); color: white; }
+    .close-btn:hover { background: linear-gradient(45deg, #999, #aaa); transform: translateY(-1px); }
+    .wa-btn { background: linear-gradient(45deg, #25D366, #20c956); color: white; }
+    .wa-btn:hover { background: linear-gradient(45deg, #20b857, #1da851); transform: translateY(-1px); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+    @keyframes popIn { from { transform: scale(0.8) translateY(-20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    .flower { position: fixed; top: -50px; font-size: 25px; pointer-events: none; z-index: 999; animation: fall linear forwards; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+    .sparkle { position: fixed; pointer-events: none; z-index: 998; animation: sparkleAnim 1.5s ease-out forwards; }
+    @keyframes sparkleAnim { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 50% { transform: scale(1) rotate(180deg); opacity: 0.8; } 100% { transform: scale(0) rotate(360deg); opacity: 0; } }
+    .rain-drop { position: fixed; top: -20px; width: 2px; height: 12px; background: rgba(255, 255, 255, 0.6); border-radius: 50%; z-index: 2000; animation: rainFall linear forwards; }
+    @keyframes rainFall { to { transform: translateY(110vh); opacity: 0; } }
+    @keyframes floatUp { to { transform: translateY(-120vh) rotate(360deg); opacity: 0; } }
+    .flying-img {
       position: fixed;
-      top: -50px;
-      font-size: 25px;
-      pointer-events: none;
-      z-index: 999;
-      animation: fall linear forwards;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      width: 80px;
+      opacity: 0.8;
+      animation: flyAnim linear infinite;
+      z-index: 1500;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-      }
-    }
-
-    /* Efek sparkle */
-    .sparkle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 998;
-      animation: sparkleAnim 1.5s ease-out forwards;
-    }
-
-    @keyframes sparkleAnim {
-      0% {
-        transform: scale(0) rotate(0deg);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1) rotate(180deg);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(0) rotate(360deg);
-        opacity: 0;
-      }
-    }
+    @keyframes flyAnim { 0% { transform: translateY(110vh) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 0.9; } 100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; } }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Mau jadi pacarku gak? 🥰</h1>
+    <h1>Udah Punya Jawaban Belum?😅</h1>
     <div class="buttons-container">
       <button id="yes" class="btn">Yes 💖</button>
       <button id="no" class="btn">No 🙅</button>
     </div>
   </div>
 
-  <!-- Popup -->
   <div id="popup" class="popup">
     <div class="popup-content">
       <h2 id="popup-text"></h2>
@@ -235,186 +146,108 @@
     </div>
   </div>
 
-  <!-- Musik -->
   <audio id="bgMusic" preload="auto">
     <source src="Terbuang.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung audio.
   </audio>
+  <audio id="typeSound" src="keyboard.mp3" preload="auto"></audio>
 
   <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const popup = document.getElementById("popup");
-    const popupText = document.getElementById("popup-text");
-    const waLink = document.getElementById("waLink");
-    const bgMusic = document.getElementById("bgMusic");
-    const buttonsContainer = document.querySelector(".buttons-container");
+    const noBtn=document.getElementById("no"),
+          yesBtn=document.getElementById("yes"),
+          popup=document.getElementById("popup"),
+          popupText=document.getElementById("popup-text"),
+          waLink=document.getElementById("waLink"),
+          bgMusic=document.getElementById("bgMusic"),
+          typeSound=document.getElementById("typeSound");
 
-    let flowerInterval = null;
-    let sparkleInterval = null;
+    let flowerInterval,sparkleInterval,heartInterval,rainInterval,imgInterval;
 
-    function showPopup(msg, withWA = false) {
-      popupText.textContent = msg;
-      popup.style.display = "flex";
-      if (withWA) {
-        waLink.style.display = "inline-block";
-        waLink.href = "https://wa.me/6285603974452?text=Iya%20aku%20mau%20jadi%20pacar%20kamu%20😍💖";
-      } else {
-        waLink.style.display = "none";
+    function showPopup(msg,withWA=false){
+      popupText.textContent=msg;
+      popup.style.display="flex";
+      waLink.style.display=withWA?"inline-block":"none";
+      if(withWA){waLink.href="https://wa.me/6285603974452?text=Iya%20aku%20mau%20jadi%20pacar%20kamu%20😍💖";}
+    }
+    function closePopup(){
+      popup.style.display="none";
+      bgMusic.pause(); bgMusic.currentTime=0;
+      stopEffects();
+    }
+
+    function typeText(element,text,totalDuration=7000,callback){
+      let i=0, speed=totalDuration/text.length;
+      typeSound.currentTime=0; typeSound.play();
+      function typing(){
+        if(i<text.length){element.innerHTML+=text.charAt(i); i++; setTimeout(typing,speed);}
+        else{ if(callback)callback(); }
       }
+      typing();
     }
 
-    function closePopup() {
-      popup.style.display = "none";
-      bgMusic.pause();
-      bgMusic.currentTime = 0;
-      stopFlowers();
-    }
-
-    // Tombol Yes - bisa diklik
-    yesBtn.addEventListener("click", (e) => {
-      createSparkles(e.clientX, e.clientY);
-      showPopup("Yeay! Kamu resmi jadi pacarku 😍💖", true);
-      bgMusic.currentTime = 5;
-      bgMusic.play();
-      startFlowers();
+    yesBtn.addEventListener("click",()=>{
+      showPopup("",true);
+      popupText.innerHTML="";
+      typeText(popupText,"Yeay! Makasih Udah Mau Nerima Aku 💖",7000);
+      bgMusic.currentTime=5; bgMusic.play();
+      startFlowers(); startFlyingImages();
     });
 
-    // Tombol No - menghindari klik
-    function moveNoButton(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const containerRect = buttonsContainer.getBoundingClientRect();
-      const yesRect = yesBtn.getBoundingClientRect();
-      const padding = 80;
-      const safeDistance = 140;
-
-      let x, y;
-      let attempts = 0;
+    // Fungsi ini membuat tombol 'No' bergerak
+    function moveNoButton(e){
+      e.preventDefault(); e.stopPropagation();
       
-      do {
-        const maxX = containerRect.width - noBtn.offsetWidth - padding;
-        const maxY = containerRect.height - noBtn.offsetHeight - padding;
-        
-        x = Math.random() * Math.max(0, maxX - padding) + padding;
-        y = Math.random() * Math.max(0, maxY - padding) + padding;
-        
-        // Pastikan dalam batas container
-        x = Math.max(padding, Math.min(x, maxX));
-        y = Math.max(padding, Math.min(y, maxY));
-        
-        attempts++;
-      } while (
-        attempts < 10 && (
-          Math.abs(x - (yesRect.left - containerRect.left)) < safeDistance ||
-          Math.abs(y - (yesRect.top - containerRect.top)) < safeDistance
-        )
-      );
-
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
+      // Ambil ukuran lebar dan tinggi layar
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
       
-      // Efek visual saat tombol kabur
-      noBtn.style.transform = "scale(0.9) rotate(5deg)";
-      setTimeout(() => {
-        noBtn.style.transform = "scale(1) rotate(0deg)";
-      }, 200);
-    }
-
-    // Event untuk tombol No (mencegah klik dan membuat kabur)
-    noBtn.addEventListener("mouseenter", moveNoButton);
-    noBtn.addEventListener("touchstart", moveNoButton);
-    noBtn.addEventListener("pointerdown", moveNoButton);
-    noBtn.addEventListener("click", moveNoButton);
-
-    // Bunga berguguran - hanya saat Yes diklik
-    function startFlowers() {
-      stopFlowers(); // Hentikan yang lama jika ada
+      // Ambil ukuran tombol 'No'
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
       
-      flowerInterval = setInterval(() => {
-        const flowers = ["🌸", "🌺", "💖", "💕", "🌹", "🌻", "🌷", "💐"];
-        const flower = document.createElement("div");
-        flower.classList.add("flower");
-        flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-        flower.style.left = Math.random() * 100 + "vw";
-        flower.style.fontSize = (Math.random() * 15 + 20) + "px";
-        flower.style.animationDuration = (Math.random() * 2 + 3) + "s";
-        flower.style.opacity = Math.random() * 0.8 + 0.4;
-        
-        document.body.appendChild(flower);
-        
-        setTimeout(() => {
-          if (flower.parentNode) {
-            flower.remove();
-          }
-        }, 5000);
-      }, 200);
-
-      // Sparkles tambahan
-      sparkleInterval = setInterval(() => {
-        createRandomSparkles();
-      }, 800);
-    }
-
-    function stopFlowers() {
-      if (flowerInterval) {
-        clearInterval(flowerInterval);
-        flowerInterval = null;
-      }
-      if (sparkleInterval) {
-        clearInterval(sparkleInterval);
-        sparkleInterval = null;
-      }
+      // Hitung posisi horizontal (x) maksimal agar tidak keluar layar
+      const maxX = screenWidth - btnWidth - 10; // -10 untuk sedikit padding
+      // Hitung posisi vertikal (y) maksimal agar tidak keluar layar
+      const maxY = screenHeight - btnHeight - 10;
       
-      // Hapus semua bunga yang masih ada
-      const flowers = document.querySelectorAll('.flower, .sparkle');
-      flowers.forEach(flower => flower.remove());
-    }
-
-    function createSparkles(x, y) {
-      const sparkles = ["✨", "⭐", "💫", "🌟"];
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => {
-          const sparkle = document.createElement("div");
-          sparkle.classList.add("sparkle");
-          sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
-          sparkle.style.left = (x + (Math.random() - 0.5) * 100) + "px";
-          sparkle.style.top = (y + (Math.random() - 0.5) * 100) + "px";
-          sparkle.style.fontSize = (Math.random() * 10 + 15) + "px";
-          document.body.appendChild(sparkle);
-          
-          setTimeout(() => {
-            if (sparkle.parentNode) {
-              sparkle.remove();
-            }
-          }, 1500);
-        }, i * 100);
-      }
-    }
-
-    function createRandomSparkles() {
-      const sparkles = ["✨", "💫"];
-      const sparkle = document.createElement("div");
-      sparkle.classList.add("sparkle");
-      sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
-      sparkle.style.left = Math.random() * 100 + "vw";
-      sparkle.style.top = Math.random() * 100 + "vh";
-      sparkle.style.fontSize = (Math.random() * 8 + 12) + "px";
-      document.body.appendChild(sparkle);
+      // Buat posisi acak di dalam batas yang sudah dihitung
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
       
-      setTimeout(() => {
-        if (sparkle.parentNode) {
-          sparkle.remove();
-        }
-      }, 1500);
+      // Terapkan posisi baru ke tombol
+      noBtn.style.position = "fixed";
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
     }
+    
+    // Tambahkan event listener agar fungsi moveNoButton berjalan saat kursor mendekat
+    ["mouseenter", "touchstart"].forEach(ev => noBtn.addEventListener(ev, moveNoButton));
 
-    // Set posisi awal tombol No
-    window.addEventListener('load', () => {
-      noBtn.style.left = "200px";
-      noBtn.style.top = "10px";
-    });
+    function startFlowers(){ stopEffects();
+      flowerInterval=setInterval(()=>{const f=["🌸","🌺","💖","💕","🌹","🌻","🌷","💐"],fl=document.createElement("div");fl.classList.add("flower");fl.textContent=f[Math.floor(Math.random()*f.length)];fl.style.left=Math.random()*100+"vw";fl.style.fontSize=(Math.random()*15+20)+"px";fl.style.animationDuration=(Math.random()*2+3)+"s";document.body.appendChild(fl);setTimeout(()=>fl.remove(),5000);},200);
+      sparkleInterval=setInterval(createRandomSparkles,800); startHearts(); startRain();
+    }
+    function createRandomSparkles(){const s=["✨","💫"],sp=document.createElement("div");sp.classList.add("sparkle");sp.textContent=s[Math.floor(Math.random()*s.length)];sp.style.left=Math.random()*100+"vw";sp.style.top=Math.random()*100+"vh";sp.style.fontSize=(Math.random()*8+12)+"px";document.body.appendChild(sp);setTimeout(()=>sp.remove(),1500);}
+    function startHearts(){heartInterval=setInterval(()=>{const h=document.createElement("div");h.textContent=["❤️","💖","💕","💞","💓"][Math.floor(Math.random()*5)];h.style.position="fixed";h.style.left=Math.random()*100+"vw";h.style.bottom="-20px";h.style.fontSize=(Math.random()*15+20)+"px";h.style.opacity=Math.random()*0.8+0.3;h.style.animation="floatUp "+(Math.random()*3+3)+"s linear forwards";document.body.appendChild(h);setTimeout(()=>h.remove(),5000);},300);}
+    function startRain(){rainInterval=setInterval(()=>{const d=document.createElement("div");d.classList.add("rain-drop");d.style.left=Math.random()*100+"vw";d.style.animationDuration=(Math.random()*0.7+0.8)+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),2000);},100);}
+
+    function startFlyingImages(){
+      imgInterval=setInterval(()=>{
+        const i=document.createElement("img");
+        i.classList.add("flying-img");
+        i.src="gambar1.png";
+        i.style.left=Math.random()*90+"vw";
+        i.style.animationDuration=(Math.random()*6+8)+"s";
+        document.body.appendChild(i);
+        setTimeout(()=>i.remove(),10000);
+      },1500);
+    }
+    
+    function stopEffects(){
+      [flowerInterval,sparkleInterval,heartInterval,rainInterval,imgInterval].forEach(int=>int&&clearInterval(int));
+      flowerInterval=sparkleInterval=heartInterval=rainInterval=imgInterval=null;
+      document.querySelectorAll('.flower,.sparkle,.rain-drop,.flying-img').forEach(el=>el.remove());
+    }
   </script>
 </body>
-</html>
+  </html>
+  
